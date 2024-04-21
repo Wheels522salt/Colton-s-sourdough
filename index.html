@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sourdough Bread Order Form</title>
+</head>
+<body>
+    <h2>Sourdough Bread Order Form</h2>
+    <form action="send_order.php" method="post">
+        <h3>Full-sized Loaves</h3>
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" required><br>
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required><br>
+        <label for="flavor">Select a flavor:</label><br>
+        <select id="flavor" name="flavor" required>
+            <option value="cinnamon">Cinnamon</option>
+            <option value="jalapeno_cheddar">Jalapeño Cheddar</option>
+            <option value="plain">Plain</option>
+            <option value="chocolate">Chocolate</option>
+            <option value="cinnamon-raisin">Cinnamon Raisin</option>
+        </select><br><br>
+        <h3>Mini Loaves</h3>
+        <label for="mini_flavor">Select a mini loaf flavor:</label><br>
+        <select id="mini_flavor" name="mini_flavor">
+            <option value="cinnamon">Cinnamon</option>
+            <option value="jalapeno_cheddar">Jalapeño Cheddar</option>
+            <option value="plain">Plain</option>
+            <option value="chocolate">Chocolate</option>
+            <option value="cinnamon-raisin">Cinnamon Raisin</option>
+        </select><br><br>
+        <label for="mini_quantity">Quantity (Mini Loaves):</label><br>
+        <input type="number" id="mini_quantity" name="mini_quantity" min="1" max="10" value="1"><br><br>
+        <input type="submit" value="Place Order">
+    </form>
+</body>
+</html>
