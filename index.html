@@ -1,43 +1,57 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Sourdough Bread Order Form</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sourdough Order Form</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h2>Sourdough Bread Order Form</h2>
-    <form action="send_order.php" method="post">
-        <h3>Full-sized Loaves</h3>
-        <label for="name">Name:</label><br>
-        <input type="text" id="name" name="name" required><br>
-        <label for="email">Email:</label><br>
-        <input type="email" id="email" name="email" required><br>
-        <label for="flavor">Select a flavor:</label><br>
-        <select id="flavor" name="flavor" required>
-            <option value="cinnamon">Cinnamon</option>
-            <option value="jalapeno_cheddar">Jalapeño Cheddar</option>
-            <option value="plain">Plain</option>
-            <option value="chocolate">Chocolate</option>
-            <option value="cinnamon-raisin">Cinnamon Raisin</option>
+    <h1>Sourdough Order Form</h1>
+    <div id="response"></div>
+    <form id="orderForm" method="post">
+        <h2>Regular Size Loaf</h2>
+        <label for="regularFlavor">Choose a flavor:</label><br>
+        <select id="regularFlavor" name="regularFlavor">
+            <option value="Plain">Plain</option>
+            <option value="Cinnamon">Cinnamon</option>
+            <option value="Jalapeno Cheddar">Jalapeno Cheddar</option>
+            <option value="Chocolate">Chocolate</option>
+            <option value="Cinnamon Raisin">Cinnamon Raisin</option>
         </select><br><br>
-        <label for="quantity">Quantity (Full-sized Loaves):</label><br>
-        <input type="number" id="quantity" name="quantity" min="1" max="10" value="1"><br><br>
         
-        <h3>Mini Loaves</h3>
-        <label for="mini">Do you want a mini loaf?</label><br>
-        <input type="checkbox" id="mini" name="mini" value="yes">
-        <label for="mini">Yes, I want a mini loaf</label><br><br>
-        
-        <label for="mini_flavor">Select a mini loaf flavor:</label><br>
-        <select id="mini_flavor" name="mini_flavor">
-            <option value="cinnamon">Cinnamon</option>
-            <option value="jalapeno_cheddar">Jalapeño Cheddar</option>
-            <option value="plain">Plain</option>
-            <option value="chocolate">Chocolate</option>
-            <option value="cinnamon-raisin">Cinnamon Raisin</option>
+        <h2>Mini Loaf Section</h2>
+        <label for="miniFlavor">Choose a flavor:</label><br>
+        <select id="miniFlavor" name="miniFlavor">
+            <option value="Plain">Plain</option>
+            <option value="Cinnamon">Cinnamon</option>
+            <option value="Jalapeno Cheddar">Jalapeno Cheddar</option>
+            <option value="Chocolate">Chocolate</option>
+            <option value="Cinnamon Raisin">Cinnamon Raisin</option>
         </select><br><br>
-        <label for="mini_quantity">Quantity (Mini Loaves):</label><br>
-        <input type="number" id="mini_quantity" name="mini_quantity" min="1" max="10" value="1"><br><br>
-        <input type="submit" value="Place Order">
+
+        <label for="quantity">Quantity:</label><br>
+        <input type="number" id="quantity" name="quantity" min="1" value="1" required><br><br>
+        
+        <input type="submit" value="Submit Order">
     </form>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("orderForm").addEventListener("submit", function (event) {
+                event.preventDefault();
+                var formData = new FormData(this);
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "sourdough_order.php", true);
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        document.getElementById("response").innerHTML = xhr.responseText;
+                        document.getElementById("orderForm").reset();
+                    }
+                };
+                xhr.send(formData);
+            });
+        });
+    </script>
 </body>
 </html>
